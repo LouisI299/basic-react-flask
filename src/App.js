@@ -1,7 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [message, setMessage] = useState("Hello");
+  useEffect(() => {
+    fetch("/test")
+      .then((res) => res.json())
+      .then((data) => {
+        setMessage(data.message);
+      });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +27,7 @@ function App() {
         >
           Learn React
         </a>
+        <p>Message from the API: {message}</p>
       </header>
     </div>
   );
